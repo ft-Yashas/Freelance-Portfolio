@@ -1,4 +1,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import gymImg from "./assets/gym.png";
+import cafeImg from "./assets/cafe.png";
+import realImg from "./assets/realestate.png";
 
 /* ══════════════════ CONFIG ══════════════════ */
 const BRAND = "Decypher Lab";
@@ -27,9 +30,9 @@ const SERVICES = [
 ];
 
 const PROJECTS = [
-  { title: "Fitness Yard Fitness", cat: "Gym & Fitness Website", desc: "A dynamic fitness platform with class bookings, trainer profiles, and membership management — built to convert walk-ins into loyal members.", accent: "#E84C3D", link: "https://gym-site-sample-single0html-file.vercel.app/", image: "/src/assets/gym.png" },
-  { title: "Brewhouse", cat: "Café Ordering System", desc: "A sleek digital ordering experience for a specialty café — menu browsing, cart management, and real-time order tracking.", accent: "#D4851F", link: "https://cafe-site-sample-single-html-file.vercel.app/", image: "/src/assets/cafe.png" },
-  { title: "Nuvora", cat: "Real Estate Advisory Platform", desc: "A premium real estate advisory platform for Bangalore — connecting verified buyers with high-value properties across Bangalore.", accent: "#2D8CF0", link: "https://real-estate-site-sample-single0html.vercel.app/", image: "/src/assets/realestate.png" },
+  { title: "Fitness Yard Fitness", cat: "Gym & Fitness Website", desc: "A dynamic fitness platform with class bookings, trainer profiles, and membership management — built to convert walk-ins into loyal members.", accent: "#E84C3D", link: "https://gym-site-sample-single0html-file.vercel.app/", image: gymImg },
+  { title: "Brewhouse", cat: "Café Ordering System", desc: "A sleek digital ordering experience for a specialty café — menu browsing, cart management, and real-time order tracking.", accent: "#D4851F", link: "https://cafe-site-sample-single-html-file.vercel.app/", image: cafeImg },
+  { title: "Nuvora", cat: "Real Estate Advisory Platform", desc: "A premium real estate advisory platform for Bangalore — connecting verified buyers with high-value properties across Bangalore.", accent: "#2D8CF0", link: "https://real-estate-site-sample-single0html.vercel.app/", image: realImg },
 ];
 
 const STEPS = [
