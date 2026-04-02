@@ -2,6 +2,10 @@ import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import gymImg from "./assets/gym.png";
 import cafeImg from "./assets/cafe.png";
 import realImg from "./assets/realestate.png";
+// import portImg from "./assets/portfolio-bg.png";
+// import testImg from "./assets/testimonial-bg.png";
+import testimonialBg from "./assets/testimonial-bg.jpg";
+import portfolioBg from "./assets/portfolio-bg.jpg";
 
 /* ══════════════════ CONFIG ══════════════════ */
 const BRAND = "Decypher Lab";
@@ -459,7 +463,7 @@ export default function DecypherLab() {
               style={{
                 padding: "110px 24px",
                 position: "relative",
-                backgroundImage: "url('/src/assets/portfolio-bg.jpg')",
+                backgroundImage: `url(${portfolioBg})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat"
@@ -579,7 +583,7 @@ export default function DecypherLab() {
             style={{
               padding: "80px 20px",
               position: "relative",
-              backgroundImage: "url('/src/assets/testimonial-bg.jpg')",
+              backgroundImage: `url(${testimonialBg})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat"
