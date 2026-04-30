@@ -3,6 +3,25 @@
 @theme {
   --color-accent: #fe2d2d;
   --color-accent-dark: #c41010;
+  --color-background: #050505;
+  --color-foreground: #f0f0f0;
+  --color-secondary: rgba(255,255,255,0.08);
+  --color-secondary-foreground: #f0f0f0;
+  --color-primary: #fe2d2d;
+  --color-primary-foreground: #ffffff;
+  --color-muted: #1e1e1e;
+  --color-muted-foreground: #888888;
+  --color-border: #1e1e1e;
+  --color-card: #0d0d0d;
+  --color-card-foreground: #f0f0f0;
+}
+
+@keyframes socialShake {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  20% { transform: translateX(-5px) rotate(-5deg); }
+  40% { transform: translateX(5px) rotate(5deg); }
+  60% { transform: translateX(-5px) rotate(-5deg); }
+  80% { transform: translateX(5px) rotate(5deg); }
 }
 
 *, *::before, *::after {

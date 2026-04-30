@@ -4,8 +4,11 @@ import { Menu, X, ChevronDown, ArrowRight, Monitor, Smartphone, Layers, Zap, Sen
 import gymImg from "./assets/gym.png";
 import cafeImg from "./assets/cafe.png";
 import realImg from "./assets/realestate.png";
+import jaideepImg from "./assets/Jaideep.png";
 import testimonialBg from "./assets/testimonial-bg.jpg";
-import portfolioBg from "./assets/portfolio-bg.jpg";
+import { FocusRail } from "./components/ui/focus-rail";
+import { SocialConnect } from "./components/ui/connect-with-us";
+import { WebGLShader } from "./components/ui/web-gl-shader";
 
 /* ══════════════════ CONSTANTS ══════════════════ */
 const WA = "917975495881";
@@ -42,6 +45,7 @@ const PROJECTS = [
   { title: "Fitness Yard Fitness", cat: "Gym & Fitness Website", desc: "A dynamic fitness platform with class bookings, trainer profiles, and membership management — built to convert walk-ins into loyal members.", accent: "#E84C3D", link: "https://gym-site-sample-single0html-file.vercel.app/", image: gymImg },
   { title: "Brewhouse", cat: "Café Ordering System", desc: "A sleek digital ordering experience for a specialty café — menu browsing, cart management, and real-time order tracking.", accent: "#D4851F", link: "https://cafe-site-sample-single-html-file.vercel.app/", image: cafeImg },
   { title: "Nuvora", cat: "Real Estate Advisory Platform", desc: "A premium real estate advisory platform for Bangalore — connecting verified buyers with high-value properties across Bangalore.", accent: "#2D8CF0", link: "https://real-estate-site-sample-single0html.vercel.app/", image: realImg },
+  { title: "Jaideep Enterprises", cat: "Brass Manufacturing & Export Website", desc: "A premium B2B industrial website for a 22+ year precision brass components manufacturer — built to establish export credibility, showcase manufacturing capability, and convert distributor inquiries into qualified leads.", accent: "#C9A227", link: "https://jaideepenterprises.com/", image: jaideepImg },
 ];
 
 const STEPS = [
@@ -384,37 +388,27 @@ function Navbar({ isDark, toggleTheme, t }) {
 }
 
 /* ══════════════════ HERO ══════════════════ */
-function Hero({ isDark, t }) {
-  const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
-
-  useEffect(() => {
-    const fn = (e) => setMousePos({ x: e.clientX, y: e.clientY });
-    window.addEventListener("mousemove", fn, { passive: true });
-    return () => window.removeEventListener("mousemove", fn);
-  }, []);
-
+function Hero({ t }) {
   const go = (hash) => document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <section style={{
       position: "relative", minHeight: "100vh",
       display: "flex", alignItems: "center", justifyContent: "center",
-      overflow: "hidden", background: t.bg, padding: "110px 24px 90px",
+      overflow: "hidden", background: "#000", padding: "110px 24px 90px",
     }}>
-      <GridBg color="rgba(254,45,45,0.022)" />
-      <FloatingOrbs dark={isDark} />
+      {/* WebGL animated wave shader */}
+      <WebGLShader />
 
-      {/* Mouse spotlight */}
+      {/* Dark vignette so text stays readable */}
       <div style={{
-        position: "absolute", width: 720, height: 720, borderRadius: "50%",
-        background: `radial-gradient(circle, rgba(254,45,45,0.07) 0%, transparent 70%)`,
-        left: mousePos.x - 360, top: mousePos.y - 360,
-        pointerEvents: "none", zIndex: 0,
-        transition: "left 0.45s ease-out, top 0.45s ease-out",
+        position: "absolute", inset: 0, zIndex: 1,
+        background: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.65) 100%)",
+        pointerEvents: "none",
       }} />
 
       {/* Content */}
-      <div style={{ maxWidth: 820, width: "100%", textAlign: "center", position: "relative", zIndex: 1 }}>
+      <div style={{ maxWidth: 820, width: "100%", textAlign: "center", position: "relative", zIndex: 2 }}>
 
         {/* Available badge */}
         <motion.div
@@ -424,28 +418,27 @@ function Hero({ isDark, t }) {
           style={{
             display: "inline-flex", alignItems: "center", gap: 8,
             padding: "7px 18px", marginBottom: 40,
-            background: t.acS, border: `1px solid ${t.acSB}`,
-            borderRadius: 100, fontSize: 12, fontWeight: 500, color: t.ac,
+            background: "rgba(254,45,45,0.08)", border: "1px solid rgba(254,45,45,0.22)",
+            borderRadius: 100, fontSize: 12, fontWeight: 500, color: "#fe2d2d",
           }}
         >
           <motion.span
-            style={{ width: 6, height: 6, borderRadius: "50%", background: t.ac, display: "inline-block", flexShrink: 0 }}
+            style={{ width: 6, height: 6, borderRadius: "50%", background: "#fe2d2d", display: "inline-block", flexShrink: 0 }}
             animate={{ opacity: [0.35, 1, 0.35] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
           Available for new projects
         </motion.div>
 
-        {/* Mono eyebrow label */}
+        {/* Mono eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
           style={{
-            fontSize: 11, fontWeight: 600, color: t.txF,
+            fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.3)",
             letterSpacing: "0.18em", textTransform: "uppercase",
-            fontFamily: "'JetBrains Mono', monospace",
-            marginBottom: 20,
+            fontFamily: "'JetBrains Mono', monospace", marginBottom: 20,
           }}
         >
           // decypher.lab &nbsp;—&nbsp; since 2025
@@ -459,24 +452,17 @@ function Hero({ isDark, t }) {
             style={{
               display: "block",
               fontSize: "clamp(36px, 6.5vw, 74px)",
-              fontWeight: 800, color: t.tx,
+              fontWeight: 800, color: "#f0f0f0",
               letterSpacing: "-0.04em", lineHeight: 1.06,
               fontFamily: "'Sora', sans-serif",
             }}
           />
           <span style={{ display: "block", fontSize: "clamp(36px, 6.5vw, 74px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1.06 }}>
-            <BlurText
-              text="that "
-              delay={55}
-              style={{ color: t.tx }}
-            />
+            <BlurText text="that " delay={55} style={{ color: "#f0f0f0" }} />
             <BlurText
               text="grow your business"
               delay={55}
-              style={{
-                color: t.ac,
-                textShadow: `0 0 40px rgba(254,45,45,0.35)`,
-              }}
+              style={{ color: "#fe2d2d", textShadow: "0 0 40px rgba(254,45,45,0.4)" }}
             />
           </span>
         </h1>
@@ -487,18 +473,17 @@ function Hero({ isDark, t }) {
           animate={{ scaleX: 1, opacity: 1 }}
           transition={{ delay: 0.9, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            width: 48, height: 2, background: t.ac,
+            width: 48, height: 2, background: "#fe2d2d",
             borderRadius: 2, margin: "28px auto",
-            boxShadow: `0 0 12px rgba(254,45,45,0.5)`,
+            boxShadow: "0 0 14px rgba(254,45,45,0.6)",
           }}
         />
 
         {/* Subtitle */}
         <FadeIn delay={0.55}>
           <p style={{
-            fontSize: "clamp(16px, 2.1vw, 18.5px)", color: t.txM,
-            lineHeight: 1.78, maxWidth: 600, margin: "0 auto 18px",
-            fontWeight: 400,
+            fontSize: "clamp(16px, 2.1vw, 18.5px)", color: "#888",
+            lineHeight: 1.78, maxWidth: 600, margin: "0 auto 18px", fontWeight: 400,
           }}>
             Websites, mobile apps, and intelligent automation — designed to help
             businesses go online, operate smarter, and scale faster.
@@ -507,16 +492,12 @@ function Hero({ isDark, t }) {
 
         {/* Location / team line */}
         <FadeIn delay={0.65}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginBottom: 44 }}>
-            <span style={{ display: "inline-block", width: 24, height: 1, background: t.txF, flexShrink: 0 }} />
-            <p style={{
-              fontSize: 13, color: t.txF,
-              fontFamily: "'JetBrains Mono', monospace",
-              letterSpacing: "0.04em",
-            }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginBottom: 48 }}>
+            <span style={{ display: "inline-block", width: 24, height: 1, background: "rgba(255,255,255,0.18)", flexShrink: 0 }} />
+            <p style={{ fontSize: 13, color: "rgba(255,255,255,0.28)", fontFamily: "'JetBrains Mono', monospace", letterSpacing: "0.04em" }}>
               A dedicated team from Bangalore, building for businesses worldwide.
             </p>
-            <span style={{ display: "inline-block", width: 24, height: 1, background: t.txF, flexShrink: 0 }} />
+            <span style={{ display: "inline-block", width: 24, height: 1, background: "rgba(255,255,255,0.18)", flexShrink: 0 }} />
           </div>
         </FadeIn>
 
@@ -526,35 +507,34 @@ function Hero({ isDark, t }) {
             <button
               onClick={() => go("#work")}
               style={{
-                background: t.ac, color: "#fff",
+                background: "#fe2d2d", color: "#fff",
                 padding: "14px 32px", borderRadius: 12,
                 fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer",
                 display: "inline-flex", alignItems: "center", gap: 8,
                 transition: "all 0.3s", fontFamily: "'Sora', sans-serif",
-                boxShadow: `0 4px 20px rgba(254,45,45,0.25)`,
+                boxShadow: "0 4px 20px rgba(254,45,45,0.28)",
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 14px 40px rgba(254,45,45,0.45)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 4px 20px rgba(254,45,45,0.25)"; }}
+              onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 14px 40px rgba(254,45,45,0.48)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 4px 20px rgba(254,45,45,0.28)"; }}
             >
               View Our Work <ArrowRight size={15} />
             </button>
-            <a
-              href={WA_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => window.open(WA_URL, "_blank")}
               style={{
-                background: "transparent", color: t.tx,
+                background: "transparent", color: "#f0f0f0",
                 padding: "14px 32px", borderRadius: 12,
                 fontSize: 14, fontWeight: 500,
-                border: `1.5px solid ${t.brd}`,
+                border: "1.5px solid rgba(255,255,255,0.18)",
                 display: "inline-flex", alignItems: "center", gap: 8,
-                textDecoration: "none", transition: "all 0.3s",
+                cursor: "pointer", transition: "all 0.3s",
+                fontFamily: "'Sora', sans-serif",
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = t.acSB; e.currentTarget.style.color = t.ac; e.currentTarget.style.transform = "translateY(-3px)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = t.brd; e.currentTarget.style.color = t.tx; e.currentTarget.style.transform = "none"; }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(254,45,45,0.5)"; e.currentTarget.style.color = "#fe2d2d"; e.currentTarget.style.transform = "translateY(-3px)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.18)"; e.currentTarget.style.color = "#f0f0f0"; e.currentTarget.style.transform = "none"; }}
             >
               Get Started
-            </a>
+            </button>
           </div>
         </FadeIn>
       </div>
@@ -564,8 +544,9 @@ function Hero({ isDark, t }) {
         onClick={() => go("#trust")}
         style={{
           position: "absolute", bottom: "3%", left: "50%",
-          transform: "translateX(-50%)", zIndex: 1,
-          background: "none", border: "none", cursor: "pointer", color: t.txF,
+          transform: "translateX(-50%)", zIndex: 2,
+          background: "none", border: "none", cursor: "pointer",
+          color: "rgba(255,255,255,0.25)",
         }}
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
@@ -700,16 +681,20 @@ function Services({ t, isDark }) {
 }
 
 /* ══════════════════ PORTFOLIO ══════════════════ */
+const FOCUS_ITEMS = PROJECTS.map((p) => ({
+  id: p.title,
+  title: p.title,
+  description: p.desc,
+  imageSrc: p.image,
+  href: p.link,
+  meta: p.cat,
+}));
+
 function Portfolio({ t }) {
   return (
-    <section id="work" style={{
-      position: "relative", padding: "110px 24px",
-      backgroundImage: `url(${portfolioBg})`,
-      backgroundSize: "cover", backgroundPosition: "center", overflow: "hidden",
-    }}>
-      <div style={{ position: "absolute", inset: 0, background: "rgba(5,5,5,0.87)" }} />
-      <GridBg color="rgba(254,45,45,0.02)" />
-      <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
+    <section id="work" style={{ position: "relative", background: "#050505" }}>
+      {/* Section header */}
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "110px 24px 48px" }}>
         <FadeIn>
           <p style={{ fontSize: 11, fontWeight: 600, color: "#fe2d2d", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 12, fontFamily: "'JetBrains Mono', monospace" }}>// Portfolio</p>
         </FadeIn>
@@ -717,67 +702,13 @@ function Portfolio({ t }) {
           <h2 style={{ fontSize: "clamp(30px, 4.5vw, 48px)", fontWeight: 800, letterSpacing: "-0.03em", marginBottom: 16, lineHeight: 1.1, color: "#f0f0f0" }}>Selected work</h2>
         </FadeIn>
         <FadeIn delay={0.12}>
-          <p style={{ fontSize: 17, color: "#888", maxWidth: 500, marginBottom: 60, lineHeight: 1.75 }}>
-            Real projects, real results. Here's some of what we've shipped.
+          <p style={{ fontSize: 17, color: "#888", maxWidth: 500, lineHeight: 1.75 }}>
+            Real projects, real results. Here&apos;s some of what we&apos;ve shipped.
           </p>
         </FadeIn>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(310px, 1fr))", gap: 24 }}>
-          {PROJECTS.map((proj, i) => (
-            <FadeIn key={i} delay={i * 0.12} dir="scale">
-              <div
-                style={{
-                  background: "rgba(10,10,10,0.72)", border: "1px solid #1e1e1e", borderRadius: 20,
-                  overflow: "hidden", transition: "all 0.4s", height: "100%",
-                  display: "flex", flexDirection: "column", backdropFilter: "blur(12px)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-8px)";
-                  e.currentTarget.style.borderColor = proj.accent + "55";
-                  e.currentTarget.style.boxShadow = `0 24px 64px ${proj.accent}18`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "none";
-                  e.currentTarget.style.borderColor = "#1e1e1e";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-              >
-                <div style={{ height: 200, overflow: "hidden" }}>
-                  <img
-                    src={proj.image}
-                    alt={proj.title}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" }}
-                    onMouseOver={(e) => { e.currentTarget.style.transform = "scale(1.06)"; }}
-                    onMouseOut={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
-                  />
-                </div>
-                <div style={{ padding: "24px 28px 28px", flex: 1, display: "flex", flexDirection: "column" }}>
-                  <span style={{
-                    fontSize: 11, fontWeight: 600, color: proj.accent,
-                    textTransform: "uppercase", letterSpacing: "0.1em",
-                    marginBottom: 10, fontFamily: "'JetBrains Mono', monospace",
-                  }}>{proj.cat}</span>
-                  <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 8, color: "#f0f0f0", letterSpacing: "-0.01em" }}>{proj.title}</h3>
-                  <p style={{ fontSize: 14, color: "#888", lineHeight: 1.72, flex: 1 }}>{proj.desc}</p>
-                  <a
-                    href={proj.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      display: "inline-flex", alignItems: "center", gap: 6,
-                      marginTop: 20, fontSize: 13, fontWeight: 600,
-                      color: "#fe2d2d", textDecoration: "none", transition: "gap 0.3s",
-                    }}
-                    onMouseEnter={(e) => { e.currentTarget.style.gap = "12px"; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.gap = "6px"; }}
-                  >
-                    View Project <ArrowRight size={14} />
-                  </a>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
       </div>
+
+      <FocusRail items={FOCUS_ITEMS} loop autoPlay={false} />
     </section>
   );
 }
@@ -1065,52 +996,13 @@ function Contact({ t, isDark }) {
               <p style={{ fontSize: 16, color: t.txM, lineHeight: 1.8 }}>
                 Have a project in mind? We&apos;d love to hear about it. Reach out and let&apos;s start a conversation.
               </p>
-              {[
-                { Icon: Mail, label: EMAIL, href: `mailto:${EMAIL}` },
-                { Icon: Phone, label: PHONE, href: `tel:${PHONE}` },
-                { Icon: IgIcon, label: "@decypherlab", href: INSTA },
-                { Icon: MapPin, label: LOC },
-              ].map((c, i) => (
-                <div key={i} style={{ display: "flex", alignItems: "center", gap: 16 }}>
-                  <div style={{
-                    width: 46, height: 46, borderRadius: 13,
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    color: t.ac, flexShrink: 0,
-                    background: t.acS, border: `1px solid ${t.acSB}`,
-                  }}>
-                    <c.Icon size={20} strokeWidth={1.5} />
-                  </div>
-                  {c.href ? (
-                    <a
-                      href={c.href}
-                      target={c.href.startsWith("http") ? "_blank" : undefined}
-                      rel="noopener noreferrer"
-                      style={{ color: t.tx, textDecoration: "none", fontSize: 15, fontWeight: 500, transition: "color 0.25s" }}
-                      onMouseEnter={(e) => { e.currentTarget.style.color = t.ac; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.color = t.tx; }}
-                    >{c.label}</a>
-                  ) : (
-                    <span style={{ fontSize: 15, fontWeight: 500, color: t.tx }}>{c.label}</span>
-                  )}
-                </div>
-              ))}
-              <a
-                href={WA_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "inline-flex", alignItems: "center", gap: 10,
-                  padding: "15px 30px",
-                  background: "linear-gradient(135deg, #25D366, #128C7E)",
-                  color: "#fff", borderRadius: 14, fontWeight: 600, fontSize: 15,
-                  textDecoration: "none", transition: "all 0.3s", width: "fit-content",
-                  boxShadow: "0 4px 20px rgba(37,211,102,0.2)",
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 12px 36px rgba(37,211,102,0.4)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 4px 20px rgba(37,211,102,0.2)"; }}
-              >
-                <WAIcon size={22} /> Chat on WhatsApp
-              </a>
+              <SocialConnect
+                email={EMAIL}
+                phone={PHONE}
+                instagram={INSTA}
+                whatsapp={WA_URL}
+                location={LOC}
+              />
             </div>
           </FadeIn>
           <FadeIn delay={0.22}>
@@ -1194,7 +1086,7 @@ function Footer({ t }) {
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-start", gap: 36, marginBottom: 44 }}>
           <div>
             <div style={{ marginBottom: 14 }}>
-              <img src="/logo.svg" alt="Decypher Lab" style={{ height: 72, objectFit: "contain" }} />
+              <img src="/logo.svg" alt="Decypher Lab" style={{ height: 62, objectFit: "contain" }} />
             </div>
             <p style={{ fontSize: 14, color: t.txM, maxWidth: 280, lineHeight: 1.68 }}>
               Building digital systems that help businesses grow. Based in Bangalore.
@@ -1268,7 +1160,7 @@ export default function DecypherLab() {
       overflowX: "hidden",
     }}>
       <Navbar isDark={isDark} toggleTheme={toggleTheme} t={t} />
-      <Hero isDark={isDark} t={t} />
+      <Hero t={t} />
       <Stats t={t} />
       <Services t={t} isDark={isDark} />
       <Portfolio t={t} />
