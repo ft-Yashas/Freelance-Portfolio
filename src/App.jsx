@@ -359,28 +359,6 @@ function Navbar({ isDark, toggleTheme, t }) {
             </a>
           </div>
 
-          {/* Theme toggle */}
-          <button
-            onClick={toggleTheme}
-            style={{
-              width: 52, height: 28, borderRadius: 100,
-              background: isDark ? "#1a1a1a" : "#e0e0e0",
-              border: `1.5px solid ${t.brd}`,
-              cursor: "pointer", position: "relative",
-              flexShrink: 0, transition: "background 0.3s",
-            }}
-            aria-label="Toggle theme"
-          >
-            <motion.div
-              style={{
-                position: "absolute", top: 3, left: 3,
-                width: 18, height: 18, borderRadius: "50%",
-                background: isDark ? t.ac : "#0a0a0a",
-              }}
-              animate={{ x: isDark ? 22 : 0 }}
-              transition={{ duration: 0.3, type: "spring", stiffness: 300, damping: 25 }}
-            />
-          </button>
         </div>
       </nav>
     </header>
